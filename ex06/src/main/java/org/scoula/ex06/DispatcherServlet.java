@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 //@WebServlet(name = "frontControllerServlet", value = "/")
-public class DispatcherServlet extends HttpServlet {
+public abstract class DispatcherServlet extends HttpServlet {
     Map<String, Command> getMap; //get 요청처리
     Map<String, Command> postMap; //post 요청처리
 
@@ -28,8 +28,7 @@ public class DispatcherServlet extends HttpServlet {
         createMap(getMap, postMap);
     }
 
-    protected void createMap(Map<String, Command> getMap, Map<String, Command> postMap) {
-    }
+    protected abstract void createMap(Map<String, Command> getMap, Map<String, Command> postMap);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,8 +41,12 @@ public class DispatcherServlet extends HttpServlet {
         }
     }
 
-    public void execute(Command command, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 
+    public void execute(Command command, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         // Command를 실행하여 View 이름 얻어오기
         String viewName = command.execute(req, resp);
 
@@ -57,11 +60,6 @@ public class DispatcherServlet extends HttpServlet {
             String view = prefix + viewName + suffix;
             req.getRequestDispatcher(view).forward(req, resp);
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
     }
 
     /**
