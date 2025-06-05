@@ -23,6 +23,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -41,7 +44,9 @@
   "keyToString": {
     "Gradle.ex05 빌드.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "Tomcat 서버.Tomcat 9.0.105.executor": "Run",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -168,6 +173,7 @@
       <workItem from="1749009956633" duration="86000" />
       <workItem from="1749010050147" duration="1893000" />
       <workItem from="1749011991531" duration="7736000" />
+      <workItem from="1749081966215" duration="22000" />
     </task>
     <servers />
   </component>

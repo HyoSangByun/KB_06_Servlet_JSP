@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import java.util.Map;
 
 @WebServlet(name = "frontControllerServlet", value = "/")
+// DispatcherServlet Servlet을 상속 받아createMap() 메서드 오버라이딩
+// -> 기존 init() 메서드에 작성한 url, 커맨드 매핑 코드를 createMap()에 작성
 public class FrontControllerServlet extends DispatcherServlet {
     HomeController homeController = new HomeController();
     TodoController todoController = new TodoController();

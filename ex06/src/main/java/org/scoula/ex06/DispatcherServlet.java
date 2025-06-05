@@ -21,9 +21,6 @@ public class DispatcherServlet extends HttpServlet {
     String prefix = "/WEB-INF/views/";
     String suffix = ".jsp";
 
-    HomeController homeController = new HomeController();
-    TodoController todoController = new TodoController();
-
     @Override
     public void init() {
         getMap = new HashMap<>();
@@ -37,7 +34,7 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Command command = getCommand(req);
-        if (command != null) {
+        if (command != null) { // url이 일치하는 커맨드가 있으면 실행
             execute(command, req, resp);
         } else { //404 에러 처리
             String view = prefix + "404" + suffix;
@@ -46,10 +43,17 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     public void execute(Command command, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+        // Command를 실행하여 View 이름 얻어오기
         String viewName = command.execute(req, resp);
+
+        // 얻어온 View 이름이 "redirect:"로 시작하는 경우 Redirect
         if (viewName.startsWith("redirect:")) { // redirect 처리
             resp.sendRedirect(viewName.substring("redirect:".length()));
-        } else {
+        }
+
+        // 나머지 경우는 접두사/접미사를 붙여 JSP로 Forward
+        else {
             String view = prefix + viewName + suffix;
             req.getRequestDispatcher(view).forward(req, resp);
         }
